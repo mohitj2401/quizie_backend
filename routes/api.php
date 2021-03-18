@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\ResultController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/quiz/create/{api_token}', [QuizController::class, 'store']);
 Route::get('/quiz/get/{api_token}', [QuizController::class, 'getQuiz']);
+Route::post('/result/get/{api_token}', [ResultController::class, 'store']);
 Route::post('/quiz/delete/{api_token}/{quiz}', [QuizController::class, 'deleteQuiz']);
 Route::post('/question/create/{api_token}/{quiz}', [QuestionController::class, 'store']);
 Route::get('/question/get/{api_token}/{quiz}', [QuestionController::class, 'getQuestion']);

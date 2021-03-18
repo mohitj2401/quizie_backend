@@ -15,7 +15,6 @@ class UserController extends Controller
         $validate = Validator($request->all(), [
             'name' => 'required',
             'role' => 'required',
-
             'email' => 'required|unique:users,email',
             'password' => 'required',
 

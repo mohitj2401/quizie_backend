@@ -15,6 +15,17 @@ class CreateResultsTable extends Migration
     {
         Schema::create('results', function (Blueprint $table) {
             $table->id();
+
+            $table->string('total');
+            $table->string('incorrect');
+            $table->string('correct');
+            $table->string('results');
+            $table->foreignId('quiz_id')
+                ->constrained()
+                ->onDelete('cascade');
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

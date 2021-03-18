@@ -62,6 +62,11 @@ class QuizController extends Controller
                     $data['data'] = $user->quiz()->withCount('question')
                         ->get();
                 }
+                if($user->role=='student'){
+                    $quiz_ids=$user->result->pluck('quiz_id');
+                    $data['data'] = Quiz::whereNotIn('id',$quiz_ids)->has('question', '>' , 0)->withCount('question')
+                        ->get();
+                }
 
                 $data['status'] = '200';
                 $data['msg'] = 'All Quizzes';
