@@ -6,7 +6,7 @@
                 <div class="card-header">{{ __('View Quiz') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('quiz.edit',$quiz->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('quiz.edit', $quiz->id) }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -23,7 +23,26 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">{{ __('Subject') }}</label>
 
+                            <div class="col-md-8">
+                                <select name="subject" class="form-control" required>
+                                    <option value="">Select a subject</option>
+                                    @foreach ($subjects as $subject)
+                                        <option value="{{ $subject->id }}" @if ($quiz->subject->id == $subject->id) selected @endif>{{ $subject->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
@@ -52,7 +71,8 @@
 
                             <div class="col-md-8">
                                 <textarea class="form-control @error('description') is-invalid @enderror" rows="10"
-                                    name="description" required>{{ old('description') ?? $quiz->description }} </textarea>
+                                    name="description"
+                                    required>{{ old('description') ?? $quiz->description }} </textarea>
 
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">

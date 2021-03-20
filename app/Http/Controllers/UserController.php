@@ -27,7 +27,7 @@ class UserController extends Controller
                 $user->name = $request->name;
                 $user->password = Hash::make($request->password);
                 $user->email = $request->email;
-                $user->role = $request->role;
+                $user->usertype_id = 3;
 
                 $api_token = time() . Str::random(30);
 

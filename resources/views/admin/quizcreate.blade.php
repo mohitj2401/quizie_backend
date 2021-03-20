@@ -41,6 +41,27 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-md-3 col-form-label">{{ __('Subject') }}</label>
+
+                            <div class="col-md-8">
+                                <select name="subject" class="form-control" required>
+                                    <option value="">Select a subject</option>
+                                    @foreach ($subjects as $subject)
+                                        <option value="{{ $subject->id }}">{{ $subject->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label ">{{ __('Description') }}</label>
 
                             <div class="col-md-8">

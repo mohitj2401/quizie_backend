@@ -50,4 +50,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Result::class);
     }
+
+    public function usertype()
+    {
+        return $this->belongsTo(UserType::class, 'usertype_id');
+    }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class);
+    }
 }

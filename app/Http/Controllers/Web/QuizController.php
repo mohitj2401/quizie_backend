@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Quiz;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,6 +23,8 @@ class QuizController extends Controller
      */
     public function index()
     {
+        $data['active'] = 'quiz';
+        $data['title'] = 'Quiz List | Quizie';
         $data['quizzes'] = Quiz::all();
         return view('admin.quiz', $data);
     }
@@ -33,8 +36,10 @@ class QuizController extends Controller
      */
     public function create()
     {
-
-        return view('admin.quizcreate');
+        $data['active'] = 'quiz';
+        $data['title'] = 'Create Quiz | Quizie';
+        $data['subjects'] = auth()->user()->subjects;
+        return view('admin.quizcreate', $data);
     }
 
     /**
@@ -49,10 +54,12 @@ class QuizController extends Controller
             'title' => 'required|max:255',
             'description' => 'required|max:255',
             'image' => 'required|image|mimes:png,jpg',
+            'subject' => 'required|bail'
         ]);
         $quiz = new Quiz();
         $quiz->description = $request->description;
         $quiz->title = $request->title;
+        $quiz->subject_id = $request->subject;
         $imageName = time() . '.' . $request->image->extension();
 
         Storage::putFileAs('public\quiz', $request->image, $imageName);
@@ -83,6 +90,9 @@ class QuizController extends Controller
     public function edit(Quiz $quiz)
     {
         $data['quiz'] = $quiz;
+        $data['active'] = 'quiz';
+        $data['title'] = 'Edit Quiz | Quizie';
+        $data['subjects'] = auth()->user()->subjects;
         return view('admin.quizview', $data);
     }
 
@@ -118,7 +128,7 @@ class QuizController extends Controller
 
         $quiz->description = $request->description;
         $quiz->title = $request->title;
-
+        $quiz->subject_id = $request->subject;
         $quiz->save();
         alert()->success('Quiz Updated Succesfully');
         return back();

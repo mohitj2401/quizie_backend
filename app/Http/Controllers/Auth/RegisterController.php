@@ -70,15 +70,10 @@ class RegisterController extends Controller
         $user->name = $data['name'];
         $user->password = Hash::make($data['password']);
         $user->email = $data['email'];
-        $user->role = 'student';
+        $user->usertype_id = 2;
 
         $api_token = time() . Str::random(30);
 
-        if (count(User::where('api_token', $user->$api_token)->get()) > 0) {
-            $user->api_token = time() . Str::random(24) . time();
-        } else {
-            $user->api_token = $api_token;
-        }
         $user->save();
 
         return $user;
