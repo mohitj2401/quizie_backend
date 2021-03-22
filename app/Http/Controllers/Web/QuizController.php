@@ -7,6 +7,7 @@ use App\Models\Quiz;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 class QuizController extends Controller
@@ -25,7 +26,7 @@ class QuizController extends Controller
     {
         $data['active'] = 'quiz';
         $data['title'] = 'Quiz List | Quizie';
-        $data['quizzes'] = Quiz::all();
+        $data['quizzes'] = auth()->user()->quiz;
         return view('admin.quiz', $data);
     }
 
@@ -59,6 +60,7 @@ class QuizController extends Controller
         $quiz = new Quiz();
         $quiz->description = $request->description;
         $quiz->title = $request->title;
+        $quiz->access_token = Str::random(8);
         $quiz->subject_id = $request->subject;
         $imageName = time() . '.' . $request->image->extension();
 

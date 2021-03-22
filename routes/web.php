@@ -49,3 +49,8 @@ Route::get('/create/subject', [SubjectController::class, 'create'])->name('teach
 Route::post('/edit/{subject}/subject', [SubjectController::class, 'update']);
 Route::get('/edit/{subject}/subject', [SubjectController::class, 'show'])->name('teacher.edit.subject');
 Route::get('/subject/{subject}/destroy', [SubjectController::class, 'destroy'])->name('subject.delete');
+
+//User
+Route::get('/user/list', [App\Http\Controllers\Web\UserController::class, 'index'])->name('user.list');
+Route::post('/user/create', [App\Http\Controllers\Web\UserController::class, 'store']);
+Route::post('/user/approve', [App\Http\Controllers\Web\UserController::class, 'statusUpdate']);

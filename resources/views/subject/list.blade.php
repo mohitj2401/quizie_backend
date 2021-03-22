@@ -19,8 +19,8 @@
                        Subjects
                        <a data-toggle="modal" data-target="#exampleModal" href=""><i class="fas fa-plus-circle"
                                style="float: right;
-                                                                                                                                                                font-size: 23px;
-                                                                                                                                                                "></i></a>
+                                                                                                                                                                            font-size: 23px;
+                                                                                                                                                                            "></i></a>
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
@@ -61,6 +61,8 @@
                                                                    class="fas fa-trash"></i>Delete</a>
                                                        </div>
                                                    </div>
+                                               @else
+                                                   Not Allowed
                                                @endif
                                            </td>
                                        </tr>
@@ -74,5 +76,6 @@
            </div>
        </main>
    @endsection
+
    @include('commons.modal',array('from_title'=>'Subject
    Create','route'=>'/create/subject','file_name'=>'subject_sample'))

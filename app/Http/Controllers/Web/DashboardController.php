@@ -20,6 +20,7 @@ class DashboardController extends Controller
     {
         $data['quizzes'] = Quiz::all();
         $data['active'] = 'dashboard';
+        $data['title'] = 'Dashboard | Quizie';
         return view('admin.index', $data);
     }
 

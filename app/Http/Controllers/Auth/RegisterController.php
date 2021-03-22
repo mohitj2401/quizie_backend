@@ -73,7 +73,7 @@ class RegisterController extends Controller
         $user->usertype_id = 2;
 
         $api_token = time() . Str::random(30);
-
+        $user->api_token = $api_token;
         $user->save();
 
         return $user;

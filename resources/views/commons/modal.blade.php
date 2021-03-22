@@ -57,7 +57,7 @@
 
                 return fileExtension === requirement;
             }, 32)
-            .addMessage('en', 'fileextension', 'The file type is not supported.');
+            .addMessage('en', 'fileextension', 'The file type is not supported. download sample');
         window.Parsley.addValidator('maxFileSize', {
             validateString: function(_value, maxSize, parsleyInstance) {
 
