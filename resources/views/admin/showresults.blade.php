@@ -6,108 +6,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <style>
-        :root {
-            --accent: white;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            padding: 0 1em;
-            background-color: #f5f5f5;
-        }
-
-        .container {
-            /* width: 100vw; */
-            /* min-height: 100vh; */
-        }
-
-        .header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .header .result {
-            margin: 1em 0.5em;
-            padding: 0.8em;
-            background-color: var(--accent);
-            border-radius: 999px;
-        }
-
-        .question {
-            border-radius: 15px;
-            background-color: var(--accent);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            padding: 1em;
-        }
-
-        div.h2 {
-            font-weight: bold;
-        }
-
-        div h3 {
-            color: blue;
-            margin: 0.2em;
-            margin-bottom: 0;
-        }
-
-        .options-container {
-            display: flex;
-            margin-left: 0.2em;
-        }
-
-        .options-container .optionsCol {
-            flex: 1;
-            font-style: italic;
-        }
-
-        .optionsCol p {
-            margin: 0.7em 0;
-        }
-
-        .answer {
-            color: blue;
-            margin-left: 0.2em;
-        }
-
-        .answer span {
-            font-weight: bold;
-        }
+        .pils {}
 
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="header">
-            <span class="result">Correct</span>
-            <span class="result">InCorrect</span>
-            <span class="result">Attempted</span>
-            <span class="result">Total</span>
-        </div>
-        <div class="question">
-            <h2>What the hell</h2>
-            <h3>Options</h3>
-            <div class="options-container">
-                <div class="optionsCol">
-                    <p>a)</p>
-                    <p>b)</p>
-                </div>
-                <div class="optionsCol">
-                    <p>c)</p>
-                    <p>d)</p>
-                </div>
-            </div>
-            <p class="answer">Your Answer - ABC</p>
-        </div>
-    </div>
-    <a href="/flutter/pdfview">DWm</a>
+    <table width="100%" style="margin-top: 1px">
+        <tr>
+            <th style="margin: 1px">
+                <p
+                    style="background-color: rgba(146, 101, 189, 0.4);border:1px solid rgba(146, 101, 189,1);border-radius:20px;text-align:center;">
+                    <span style="color:rgb(41, 39, 39);">Total : {{ $result->total }}</span>
+                </p>
+            </th>
+            <th style="margin: 1px">
+                <p
+                    style="background-color: rgba(146, 101, 189, 0.4);border:1px solid rgba(146, 101, 189,1);border-radius:20px;text-align:center;">
+                    <span style="color:rgb(41, 39, 39);">Incorrect : {{ $result->incorrect }}</span>
+                </p>
+            </th>
+            <th style="margin: 1px">
+                <p
+                    style="background-color: rgba(146, 101, 189, 0.4);border:1px solid rgba(146, 101, 189,1);border-radius:20px;text-align:center;">
+                    <span style="color:rgb(41, 39, 39);">Correct : {{ $result->correct }}</span>
+                </p>
+            </th>
+            <th style="margin: 1px">
+                <p
+                    style="background-color: rgba(146, 101, 189, 0.4);border:1px solid rgba(146, 101, 189,1);border-radius:20px;text-align:center;">
+                    <span style="color:rgb(41, 39, 39);">NotAttempted :
+                        {{ $result->notAttempted }}</span>
+                </p>
+            </th>
+
+        </tr>
+        @for ($i = 0; $i < count($result_json); $i++)
+
+            <?php $question = App\Models\Question::find($result_json[$i]->id); ?>
+            <tr>
+                <td colspan="4">
+                    <p style="margin-top: 25px;font-size:20px">Q{{ $i + 1 . '  ) ' . $question->title }}</p>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p style="margin-left: 25px; padding:4px; color:green;"><b>A ) {{ $question->option1 }}</b></p>
+                </td>
+                <td colspan="2">
+                    <p class="text-primary" style="margin-left: 25px; padding:4px">B ) {{ $question->option2 }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p class="text-primary" style="margin-left: 25px; padding:4px">C ) {{ $question->option3 }}</p>
+                </td>
+                <td colspan="2">
+                    <p class="text-primary" style="margin-left: 25px; padding:4px">D ) {{ $question->option4 }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <p class="text-success" style="margin-left: 20px;padding:10px 0px"> <b>Your Answer is
+                            {{ $result_json[$i]->answer }}</b></p>
+                </td>
+            </tr>
+        @endfor
+    </table>
+
+
 </body>
 
 </html>

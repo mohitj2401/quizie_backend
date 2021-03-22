@@ -57,12 +57,12 @@ class QuizController extends Controller
         if ($api_token) {
             $user = User::where('api_token', $api_token)->first();
             if ($user) {
-                // try {
+                try {
                 if (count($user->quiz) > 0) {
                     $data['data'] = $user->quiz()->withCount('question')
                         ->get();
                 }
-                if($user->role=='student'){
+                if($user->usertype_id==3){
                     $quiz_ids=$user->result->pluck('quiz_id');
                     $data['data'] = Quiz::whereNotIn('id',$quiz_ids)->has('question', '>' , 0)->withCount('question')
                         ->get();
@@ -70,11 +70,11 @@ class QuizController extends Controller
 
                 $data['status'] = '200';
                 $data['msg'] = 'All Quizzes';
-                // } catch (\Throwable $th) {
-                //     $data['status'] = '401';
-                //     $data['msg'] = 'Please Try Again After Some Time';
-                //     $data['th'] = $th;
-                // }
+                } catch (\Throwable $th) {
+                    $data['status'] = '401';
+                    $data['msg'] = 'Please Try Again After Some Time';
+                    $data['th'] = $th;
+                }
             } else {
                 $data['status'] = '404';
                 $data['msg'] = 'User Not Found';

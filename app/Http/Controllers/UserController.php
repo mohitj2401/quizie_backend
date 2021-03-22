@@ -63,7 +63,7 @@ class UserController extends Controller
                     $data['status'] = '200';
                     $data['msg'] = 'Logged In Successfully';
                     $data['api_token'] = $user->api_token;
-                    $data['role'] = $user->role;
+                    $data['role'] = $user->usertype->role;
                 } else {
                     $data['status'] = '201';
                     $data['msg'] = 'incorrect email or password';

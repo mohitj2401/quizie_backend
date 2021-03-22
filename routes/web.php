@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\SubjectController;
+use App\Models\Result;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -54,3 +56,13 @@ Route::get('/subject/{subject}/destroy', [SubjectController::class, 'destroy'])-
 Route::get('/user/list', [App\Http\Controllers\Web\UserController::class, 'index'])->name('user.list');
 Route::post('/user/create', [App\Http\Controllers\Web\UserController::class, 'store']);
 Route::post('/user/approve', [App\Http\Controllers\Web\UserController::class, 'statusUpdate']);
+
+// Route::get('show/results', function () {
+//     $result = Result::find(2);
+
+//     $data['result'] = $result;
+//     $data['result_json'] = json_decode($result->results);
+//     // dd($data['result_json'][0]->id);
+//     return view('admin.showresults', $data);
+// });
+Route::get('/download/DPf', [App\Http\Controllers\Web\DashboardController::class, 'pdfview']);

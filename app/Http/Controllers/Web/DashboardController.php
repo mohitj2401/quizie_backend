@@ -24,19 +24,16 @@ class DashboardController extends Controller
         return view('admin.index', $data);
     }
 
-    public function showresults()
-    {
-        $data['results'] = Result::all();
-        return view('admin.showresults', $data);
-    }
+
 
     public function pdfview(Request $request)
     {
 
+        $result = Result::find(2);
 
-
-
-        $pdf = PDF::loadView('admin.showresults');
+        $data['result'] = $result;
+        $data['result_json'] = json_decode($result->results);
+        $pdf = PDF::loadView('admin.showresults', $data);
 
         return $pdf->download('pdfview.pdf');
     }
