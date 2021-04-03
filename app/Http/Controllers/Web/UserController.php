@@ -52,7 +52,7 @@ class UserController extends Controller
 
                 alert()->success('Data Inserted Successfully');
             } catch (\Throwable $th) {
-                dd($th);
+                // dd($th);
                 alert()->error('Please check excel file', 'An Error Occur');
             }
             return redirect()->back();

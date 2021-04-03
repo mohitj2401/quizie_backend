@@ -76,6 +76,39 @@
                 </td>
             </tr>
         @endfor
+        <?php $question_not = App\Models\Question::whereNotIn('id',$result->questionsid())->get(); ?>
+        
+        @foreach ($question_not as $question)
+
+
+            <tr>
+                <td colspan="4">
+                    <p style="margin-top: 25px;font-size:20px">Q{{ $i + 1 . '  ) ' . $question->title }}</p>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p style="margin-left: 25px; padding:4px; color:green;"><b>A ) {{ $question->option1 }}</b></p>
+                </td>
+                <td colspan="2">
+                    <p class="text-primary" style="margin-left: 25px; padding:4px">B ) {{ $question->option2 }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p class="text-primary" style="margin-left: 25px; padding:4px">C ) {{ $question->option3 }}</p>
+                </td>
+                <td colspan="2">
+                    <p class="text-primary" style="margin-left: 25px; padding:4px">D ) {{ $question->option4 }}</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <p class="text-success" style="margin-left: 20px;padding:10px 0px"> <b>Not Answered</b></p>
+                </td>
+            </tr>
+        @endforeach
     </table>
 
 

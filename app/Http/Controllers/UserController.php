@@ -14,7 +14,6 @@ class UserController extends Controller
     {
         $validate = Validator($request->all(), [
             'name' => 'required',
-            'role' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required',
 
@@ -38,6 +37,7 @@ class UserController extends Controller
                 }
                 $user->save();
                 $data['status'] = '200';
+                $data['api_token'] = $user->api_token;
                 $data['msg'] = 'Registered User Succesfully , Please Log In';
             } catch (\Throwable $th) {
                 $data['status'] = '401';
@@ -53,6 +53,8 @@ class UserController extends Controller
             'email' => 'required|exists:users,email|email',
             'password' => 'required',
 
+        ],[
+            'email.exists'=>"No account exist with this email address"
         ]);
         if ($validate->fails()) {
             return response()->json($validate->errors());
@@ -63,7 +65,6 @@ class UserController extends Controller
                     $data['status'] = '200';
                     $data['msg'] = 'Logged In Successfully';
                     $data['api_token'] = $user->api_token;
-                    $data['role'] = $user->usertype->role;
                 } else {
                     $data['status'] = '201';
                     $data['msg'] = 'incorrect email or password';
