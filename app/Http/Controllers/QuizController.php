@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Quiz;
 use App\Models\User;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use DB;
@@ -52,11 +53,12 @@ class QuizController extends Controller
             return response()->json($data);
         }
     }
-    public function getQuiz($api_token)
+    public function getQuiz($subject,$api_token)
     {
         if ($api_token) {
             $user = User::where('api_token', $api_token)->first();
             if ($user) {
+                 
                 try {
                 if (count($user->quiz) > 0) {
                     $data['data'] = $user->quiz()->withCount('question')
@@ -64,7 +66,7 @@ class QuizController extends Controller
                 }
                 if($user->usertype_id==3){
                     $quiz_ids=$user->result->pluck('quiz_id');
-                    $data['data'] = Quiz::whereNotIn('id',$quiz_ids)->has('question', '>' , 0)->withCount('question')
+                    $data['data'] = Subject::find($subject)->quiz()->whereNotIn('id',$quiz_ids)->has('question', '>' , 0)->withCount('question')
                         ->get();
                 }
 
