@@ -35,7 +35,7 @@ class DashboardController extends Controller
         $data['result_json'] = json_decode($result->results);
         $pdf = PDF::loadView('admin.showresults', $data);
 
-        return $pdf->download('pdfview.pdf');
+        return $pdf->download('result.pdf');
         // return view('admin.showresults', $data);
     }
 }
