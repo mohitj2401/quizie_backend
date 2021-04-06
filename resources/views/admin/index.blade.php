@@ -91,7 +91,7 @@
                                              <td>{{ $quiz->title }}</td>
                                              <td>{{ $quiz->user->name }}</td>
                                              <td>{{ $quiz->question()->count() }}</td>
-                                             <td>{{ $quiz->user->role }}</td>
+                                             <td>{{ $quiz->user->usertype->role }}</td>
                                              <td>{{ $quiz->created_at }}</td>
 
                                          </tr>

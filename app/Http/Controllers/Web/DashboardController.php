@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\Result;
+use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
 
@@ -26,10 +27,10 @@ class DashboardController extends Controller
 
 
 
-    public function pdfview(Request $request)
+    public function pdfview(User $user, Quiz $quiz)
     {
 
-        $result = Result::find(3);
+        $result = Result::where('user_id', $user->id)->where('quiz_id', $quiz->id)->first();
 
         $data['result'] = $result;
         $data['result_json'] = json_decode($result->results);

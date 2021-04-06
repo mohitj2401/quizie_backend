@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\DashboardController;
+use App\Http\Controllers\Web\ResultController;
 use App\Http\Controllers\Web\SubjectController;
 use App\Models\Result;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -65,4 +66,7 @@ Route::post('/user/approve', [App\Http\Controllers\Web\UserController::class, 's
 //     // dd($data['result_json'][0]->id);
 //     return view('admin.showresults', $data);
 // });
-Route::get('/download/DPf', [App\Http\Controllers\Web\DashboardController::class, 'pdfview']);
+Route::get('/download/result/{user}/{quiz}', [App\Http\Controllers\Web\DashboardController::class, 'pdfview'])->name('download.results');
+
+//Results
+Route::get('/result/users/{quiz}', [App\Http\Controllers\Web\ResultController::class, 'index'])->name('quiz.results');

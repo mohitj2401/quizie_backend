@@ -32,14 +32,14 @@ class AppSubjectController extends Controller
         }
         return response()->json($data);
     }
-    public function getSearchSubjects($api_token,$sub_name)
+    public function getSearchSubjects($api_token, $sub_name)
     {
         if ($api_token) {
             $user = User::where('api_token', $api_token)->first();
             if ($user) {
                 try {
                     if ($user->usertype_id == 3) {
-                        $data['data'] = Subject::where('name','LIKE',"%{$sub_name}%")->has('quiz', '>', 0)->get();
+                        $data['data'] = Subject::where('name', 'LIKE', "%{$sub_name}%")->has('quiz', '>', 0)->get();
                     }
 
                     $data['status'] = '200';
@@ -56,6 +56,4 @@ class AppSubjectController extends Controller
         }
         return response()->json($data);
     }
-
-    
 }

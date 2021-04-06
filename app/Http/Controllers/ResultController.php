@@ -27,7 +27,7 @@ class ResultController extends Controller
                     $result->notAttempted = $request['notAttempted'];
                     $result->total = $request['total'];
                     $result->incorrect = $request['incorrect'];
-                    $result->correct =$request['correct'];
+                    $result->correct = $request['correct'];
                     $result->quiz_id = $request['quizId'];
                     $result->save();
                     $data['status'] = '200';
@@ -44,7 +44,7 @@ class ResultController extends Controller
         return $data;
     }
 
-    public function getSearchQuiz($api_token,$quiz_name)
+    public function getSearchQuiz($api_token, $quiz_name)
     {
         // $encode=json_encode($request->data1);
         // $decode=json_decode($encode);
@@ -53,8 +53,8 @@ class ResultController extends Controller
             $user = User::where('api_token', $api_token)->first();
             if ($user) {
                 try {
-                    $quiz_ids=$user->result->pluck('quiz_id');
-                   $data['data']= Quiz::where('title','LIKE',"%{$quiz_name}%")->whereIn('id',$quiz_ids)->get();
+                    $quiz_ids = $user->result->pluck('quiz_id');
+                    $data['data'] = Quiz::where('title', 'LIKE', "%{$quiz_name}%")->whereIn('id', $quiz_ids)->get();
                     $data['status'] = '200';
                     $data['msg'] = 'Result Stored Successfully';
                 } catch (\Throwable $th) {
@@ -69,15 +69,15 @@ class ResultController extends Controller
         return $data;
     }
 
-     public function getPlayedQuiz($api_token)
+    public function getPlayedQuiz($api_token)
     {
         $data = array();
         if ($api_token) {
             $user = User::where('api_token', $api_token)->first();
             if ($user) {
                 try {
-                    $quiz_ids=$user->result->pluck('quiz_id');
-                    $data['data'] = Quiz::whereIn('id',$quiz_ids)->get();
+                    $quiz_ids = $user->result->pluck('quiz_id');
+                    $data['data'] = Quiz::whereIn('id', $quiz_ids)->get();
                     $data['status'] = '200';
                     $data['msg'] = 'Result Stored Successfully';
                 } catch (\Throwable $th) {
@@ -92,15 +92,15 @@ class ResultController extends Controller
         return $data;
     }
 
-    public function pdfview($api_token,$quiz_id)
+    public function pdfview($api_token, $quiz_id)
     {
         $data = array();
         if ($api_token) {
             $user = User::where('api_token', $api_token)->first();
             if ($user) {
-               
+
                 try {
-                    $result = Result::where('quiz_id',$quiz_id)->first();
+                    $result = Result::where('quiz_id', $quiz_id)->where('user_id', $user->id)->first();
 
                     $data['result'] = $result;
                     $data['result_json'] = json_decode($result->results);
@@ -116,7 +116,7 @@ class ResultController extends Controller
                 $data['msg'] = 'User Not Found';
             }
         }
-       
+
         return $data;
         // return view('admin.showresults', $data);
     }

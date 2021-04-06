@@ -9,7 +9,17 @@ class Result extends Model
 {
     use HasFactory;
 
-    public function questionsid(){
-		return collect(json_decode($this->results))->pluck('id');
+    public function questionsid()
+    {
+        return collect(json_decode($this->results))->pluck('id');
+    }
+
+    public function quiz()
+    {
+        return $this->belongsTo(Quiz::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
