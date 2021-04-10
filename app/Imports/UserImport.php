@@ -10,12 +10,23 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class UserImport implements ToModel, WithHeadingRow
+class UserImport implements ToModel, WithHeadingRow, WithValidation
 {
     /**
      * @param Collection $collection
      */
+    public function rules(): array
+    {
+        return [
+            'name'             => 'required|max:35',
+            'email'            => 'required|exists:users,email|email',
+            'dob'              => 'required',
+
+        ];
+    }
+
     public function model(array $row)
     {
         if (auth()->user()->usertype_id == 1) {
