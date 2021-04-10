@@ -18,6 +18,7 @@ class CreateQuizzesTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('image');
+            $table->tinyInteger('status')->default(1);
             $table->string('access_token');
             $table->foreignId('user_id')
                 ->constrained()

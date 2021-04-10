@@ -28,8 +28,8 @@
                        User List
                        <a data-toggle="modal" data-target="#Import" href=""><i class="fas fa-plus-circle"
                                style="float: right;
-                                                                                                                                                                                                                                                                                                                                                                                font-size: 23px;
-                                                                                                                                                                                                                                                                                                                                                                                "></i></a>
+                                                                                                                                                                                                                                                                                                                                                                                    font-size: 23px;
+                                                                                                                                                                                                                                                                                                                                                                                    "></i></a>
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
@@ -70,7 +70,7 @@
                                                            href="{{ route('teacher.edit.subject', $user->id) }}"><i
                                                                class="fas fa-pencil-alt"></i>Edit</a>
                                                        <a class="dropdown-item"
-                                                           href="{{ route('subject.delete', $user->id) }}"><i
+                                                           href="{{ route('user.delete', $user->id) }}"><i
                                                                class="fas fa-trash"></i>Delete</a>
                                                    </div>
                                                </div>
@@ -87,6 +87,13 @@
            </div>
        </main>
    @endsection
+   @if (auth()->user()->usertype_id == 1)
+       @include('commons.modal',array('from_title'=>'Teacher
+       Create','route'=>'/user/create','file_name'=>'user_sample'))
+   @else
+       @include('commons.modal',array('from_title'=>'Student
+       Create','route'=>'/user/create','file_name'=>'user_sample'))
+   @endif
    @section('scripts')
 
        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap2-toggle.js"></script>
@@ -142,10 +149,3 @@
 
        </script>
    @endsection
-   @if (auth()->user()->usertype_id == 1)
-       @include('commons.modal',array('from_title'=>'Teacher
-       Create','route'=>'/user/create','file_name'=>'user_sample'))
-   @else
-       @include('commons.modal',array('from_title'=>'Student
-       Create','route'=>'/user/create','file_name'=>'user_sample'))
-   @endif

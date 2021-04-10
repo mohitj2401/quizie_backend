@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('api_token')->unique();
             $table->string('email')->unique();
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('deleted')->default(0);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

@@ -57,6 +57,7 @@ Route::get('/subject/{subject}/destroy', [SubjectController::class, 'destroy'])-
 Route::get('/user/list', [App\Http\Controllers\Web\UserController::class, 'index'])->name('user.list');
 Route::post('/user/create', [App\Http\Controllers\Web\UserController::class, 'store']);
 Route::post('/user/approve', [App\Http\Controllers\Web\UserController::class, 'statusUpdate']);
+Route::get('/user/disable/{user}', [App\Http\Controllers\Web\UserController::class, 'destroy'])->name('user.delete');
 
 // Route::get('show/results', function () {
 //     $result = Result::find(2);
@@ -69,4 +70,4 @@ Route::post('/user/approve', [App\Http\Controllers\Web\UserController::class, 's
 Route::get('/download/result/{user}/{quiz}', [App\Http\Controllers\Web\DashboardController::class, 'pdfview'])->name('download.results');
 
 //Results
-Route::get('/result/users/{quiz}', [App\Http\Controllers\Web\ResultController::class, 'index'])->name('quiz.results');
+Route::get('/result/{quiz}/users', [App\Http\Controllers\Web\ResultController::class, 'index'])->name('quiz.results');

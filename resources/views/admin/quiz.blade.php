@@ -18,8 +18,8 @@
                        <i class="fas fa-table mr-1"></i>
                        Quiz
                        <a href="{{ route('create.quiz') }}"><i class="fas fa-plus-circle" style="float: right;
-                                            font-size: 23px;
-                                            "></i></a>
+                                                                font-size: 23px;
+                                                                "></i></a>
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
@@ -27,10 +27,9 @@
                                <thead>
                                    <tr>
                                        <th>Title</th>
-
-                                       <th>Created By</th>
                                        <th>Total Questions</th>
-                                       <th>Role</th>
+                                       <th>Attempted User</th>
+
                                        <th>Date</th>
                                        <th>Action</th>
 
@@ -41,9 +40,9 @@
                                    @foreach ($quizzes as $quiz)
                                        <tr>
                                            <td>{{ $quiz->title }}</td>
-                                           <td>{{ $quiz->user->name }}</td>
+
                                            <td>{{ $quiz->question()->count() }}</td>
-                                           <td>{{ $quiz->user->usertype->role }}</td>
+                                           <td>{{ count($quiz->result) }}</td>
                                            <td>{{ $quiz->created_at }}</td>
                                            <td>
                                                <div class="dropdown">
@@ -56,7 +55,7 @@
                                                                class="fas fa-pencil-alt"></i>Edit</a>
                                                        <a class="dropdown-item"
                                                            href="{{ route('quiz.results', $quiz->id) }}"><i
-                                                               class="fas fa-pencil-alt"></i>User Attempted</a>
+                                                               class="fas fa-eye"></i>User Attempted</a>
                                                        <a class="dropdown-item"
                                                            href="{{ route('create.question', $quiz->id) }}"><i
                                                                class="fas fa-plus-circle"></i>Add Question</a>

@@ -53,14 +53,14 @@ class UserController extends Controller
             'email' => 'required|exists:users,email|email',
             'password' => 'required',
 
-        ],[
-            'email.exists'=>"No account exist with this email address"
+        ], [
+            'email.exists' => "No account exist with this email address"
         ]);
         if ($validate->fails()) {
             return response()->json($validate->errors());
         } else {
             try {
-                $user = User::where('email', $request->email)->first();
+                $user = User::where('email', $request->email)->where('usertype_id', 3)->first();
                 if (Hash::check($request->password, $user->password)) {
                     $data['status'] = '200';
                     $data['msg'] = 'Logged In Successfully';

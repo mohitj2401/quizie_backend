@@ -45,10 +45,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->hasFile('excel')) {
-            $path = $request->file('excel')->getRealPath();
+        if ($request->hasFile('excel')) {;
             try {
-                Excel::import(new UserImport(), $path);
+                Excel::import(new UserImport(), $request->file('excel'));
 
                 alert()->success('Data Inserted Successfully');
             } catch (\Throwable $th) {
@@ -102,9 +101,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->deleted = 1;
+        $user->save();
+        alert()->success('User deleted successfuly');
+        return redirect()->back();
     }
 
     public function statusUpdate(Request $request)
