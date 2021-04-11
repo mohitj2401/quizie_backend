@@ -19,8 +19,8 @@
                        Subjects
                        <a data-toggle="modal" data-target="#exampleModal" href=""><i class="fas fa-plus-circle"
                                style="float: right;
-                                                                                                                                                                            font-size: 23px;
-                                                                                                                                                                            "></i></a>
+                                                                                                                                                                                                font-size: 23px;
+                                                                                                                                                                                                "></i></a>
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
@@ -56,6 +56,16 @@
                                                            <a class="dropdown-item"
                                                                href="{{ route('teacher.edit.subject', $subject->id) }}"><i
                                                                    class="fas fa-pencil-alt"></i>Edit</a>
+                                                           @if ($subject->status != 1)
+                                                               <a class="dropdown-item"
+                                                                   href="{{ route('subject.status', ['subject' => $subject->id, 'status' => 'active']) }}"><i
+                                                                       class="fas fa-exclamation"></i>Active</a>
+                                                           @else
+                                                               <a class="dropdown-item"
+                                                                   href="{{ route('subject.status', ['subject' => $subject->id, 'status' => 'inactive']) }}"><i
+                                                                       class="fas fa-exclamation"></i>Inactive</a>
+
+                                                           @endif
                                                            <a class="dropdown-item"
                                                                href="{{ route('subject.delete', $subject->id) }}"><i
                                                                    class="fas fa-trash"></i>Delete</a>

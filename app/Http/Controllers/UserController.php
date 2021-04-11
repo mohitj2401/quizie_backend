@@ -60,15 +60,21 @@ class UserController extends Controller
             return response()->json($validate->errors());
         } else {
             try {
-                $user = User::where('email', $request->email)->where('usertype_id', 3)->first();
-                if (Hash::check($request->password, $user->password)) {
+                $user = User::where('email', $request->email)->where('usertype_id', 3)->where('status', 1)->first();
+                if($user){
+                    if (Hash::check($request->password, $user->password)) {
                     $data['status'] = '200';
                     $data['msg'] = 'Logged In Successfully';
                     $data['api_token'] = $user->api_token;
-                } else {
-                    $data['status'] = '201';
-                    $data['msg'] = 'incorrect email or password';
+                    } else {
+                        $data['status'] = '201';
+                        $data['msg'] = 'incorrect email or password ';
+                    }
+                }else{
+                        $data['status'] = '201';
+                        $data['msg'] = 'Account deactivated please contact admin';
                 }
+                
             } catch (\Throwable $th) {
                 $data['status'] = '401';
                 $data['msg'] = 'Please Try Again After Some Time';

@@ -52,6 +52,7 @@ Route::get('/create/subject', [SubjectController::class, 'create'])->name('teach
 Route::post('/edit/{subject}/subject', [SubjectController::class, 'update']);
 Route::get('/edit/{subject}/subject', [SubjectController::class, 'show'])->name('teacher.edit.subject');
 Route::get('/subject/{subject}/destroy', [SubjectController::class, 'destroy'])->name('subject.delete');
+Route::get('/subject/{status}/{subject}/update', [SubjectController::class, 'statusUpdate'])->name('subject.status');
 
 //User
 Route::get('/user/list', [App\Http\Controllers\Web\UserController::class, 'index'])->name('user.list');

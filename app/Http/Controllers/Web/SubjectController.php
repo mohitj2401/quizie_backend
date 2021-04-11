@@ -141,4 +141,23 @@ class SubjectController extends Controller
         }
         return redirect()->back();
     }
+
+
+    public function statusUpdate($status, Subject $subject)
+    {
+        if ($subject->user->id != auth()->user()->id) {
+            alert()->error("Don't have enough privileges for performing this action");
+        }
+
+        if ($status == 'active' || $status == 'inactive') {
+            // dd($status);
+            $subject->status = $status == 'active' ? 1 : 0;
+            $subject->save();
+
+            alert()->success('Status updated successfully');
+        } else {
+            alert()->error("Don't have enough privileges for performing this action");
+        }
+        return redirect()->back();
+    }
 }

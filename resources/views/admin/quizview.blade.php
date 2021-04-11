@@ -43,7 +43,21 @@
 
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">{{ __('Duration (In Minutes)') }}</label>
 
+                            <div class="col-md-8">
+                                <input class="form-control @error('duration') is-invalid @enderror" type="number"
+                                    name="duration" value="{{ old('duration') ?? $quiz->duration }}" required>
+
+                                @error('duration')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
 
