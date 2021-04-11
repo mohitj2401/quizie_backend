@@ -108,6 +108,7 @@
                     <p class="text-success" style="margin-left: 20px;padding:10px 0px"> <b>Not Answered</b></p>
                 </td>
             </tr>
+            <?php $i=$i+1;?>
         @endforeach
     </table>
 

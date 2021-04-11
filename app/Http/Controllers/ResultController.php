@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\Result;
 use App\Models\User;
 use App\Models\Quiz;
@@ -23,11 +24,24 @@ class ResultController extends Controller
                     $result = new Result;
 
                     $result->results = $request['data1'];
+                    $res = json_decode($request['data1']);
+                    $notAttempted = count(Quiz::find($request['quizId'])->question) - count($res);
+                    $correct = 0;
+                    $incorrect = 0;
+                    foreach ($res as $key) {
+
+                        if (Question::where('id', $key->id)->where('option1', $key->answer)->first()) {
+                            $correct++;
+                        } else {
+                            $incorrect++;
+                        }
+                    }
+
                     $result->user_id = $user->id;
-                    $result->notAttempted = $request['notAttempted'];
+                    $result->notAttempted = $notAttempted;
                     $result->total = $request['total'];
-                    $result->incorrect = $request['incorrect'];
-                    $result->correct = $request['correct'];
+                    $result->incorrect = $incorrect;
+                    $result->correct = $correct;
                     $result->quiz_id = $request['quizId'];
                     $result->save();
                     $data['status'] = '200';
