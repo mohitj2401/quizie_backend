@@ -25,7 +25,8 @@ class ResultController extends Controller
 
                     $result->results = $request['data1'];
                     $res = json_decode($request['data1']);
-                    $notAttempted = count(Quiz::find($request['quizId'])->question) - count($res);
+                    $total=count(Quiz::find($request['quizId'])->question); 
+                    $notAttempted = $total - count($res);
                     $correct = 0;
                     $incorrect = 0;
                     foreach ($res as $key) {
@@ -39,7 +40,7 @@ class ResultController extends Controller
 
                     $result->user_id = $user->id;
                     $result->notAttempted = $notAttempted;
-                    $result->total = $request['total'];
+                    $result->total =$total;
                     $result->incorrect = $incorrect;
                     $result->correct = $correct;
                     $result->quiz_id = $request['quizId'];
