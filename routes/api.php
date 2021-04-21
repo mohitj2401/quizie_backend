@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/register', [UserController::class, 'register']);
+Route::get('/get/user/{api_token}', [UserController::class, 'getUser']);
+Route::post('/update/user/{api_token}', [UserController::class, 'updateUser']);
+Route::post('/update/password/{api_token}', [UserController::class, 'updatePass']);
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/quiz/create/{api_token}', [QuizController::class, 'store']);
 Route::get('/quiz/get/{subject}/{api_token}', [QuizController::class, 'getQuiz']);
