@@ -1,4 +1,7 @@
 @extends('admin.layouts.admin')
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.datetimepicker.css') }}" />
+@endsection
 @section('content')
     <main>
         <div class="container" style="margin-top: 20px;">
@@ -59,6 +62,26 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-md-3 col-form-label">{{ __('Start Time') }}</label>
+
+                            <div class="col-md-8">
+                                <input type="text" id="demo" name="start_date"
+                                    value="{{ old('start_date') ?? $quiz->start_time }}" onchange="updateEndDtae();"
+                                    required />
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 col-form-label">{{ __('End Time') }}</label>
+
+                            <div class="col-md-8">
+                                <input type="text" id="demo2" name="end_date"
+                                    value="{{ old('end_date') ?? $quiz->end_time }}" required />
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label class="col-md-3 col-form-label">{{ __('Image') }}</label>
 
                             <div class="col-md-6">
@@ -108,4 +131,33 @@
         </div>
     </main>
 
+@endsection
+@section('scripts')
+    <script src="{{ asset('assets/js/jquery.datetimepicker.full.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#demo').datetimepicker({
+
+
+
+                format: 'Y/m/d H:i',
+
+
+            });
+        });
+
+        function updateEndDtae() {
+            var min = $('#demo').val();
+
+            $('#demo2').datetimepicker({
+
+
+                minDate: min,
+
+                format: 'Y/m/d H:i'
+
+            });
+        }
+
+    </script>
 @endsection

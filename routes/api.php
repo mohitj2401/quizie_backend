@@ -23,6 +23,7 @@ Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 Route::post('/quiz/create/{api_token}', [QuizController::class, 'store']);
 Route::get('/quiz/get/{subject}/{api_token}', [QuizController::class, 'getQuiz']);
+Route::get('/quiz/get/{quiz_id}/{api_token}', [QuizController::class, 'getSingleQuiz']);
 Route::post('/result/store/{api_token}', [ResultController::class, 'store']);
 Route::get('/result/getquiz/{api_token}', [ResultController::class, 'getPlayedQuiz']);
 Route::post('/quiz/delete/{api_token}/{quiz}', [QuizController::class, 'deleteQuiz']);

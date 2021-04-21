@@ -20,15 +20,16 @@ class UserImport implements ToModel, WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-            'name'             => 'required|max:35',
-            'email'            => 'required|exists:users,email|email',
-            'dob'              => 'required',
+            'name'             => ['required', 'string', 'max:255'],
+            'email'            => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'dob'              =>  ['required'],
 
         ];
     }
 
     public function model(array $row)
     {
+
         if (auth()->user()->usertype_id == 1) {
             $user_type_id = 2;
         } else {

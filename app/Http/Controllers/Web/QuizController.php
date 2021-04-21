@@ -51,6 +51,8 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request->all());
         $request->validate([
             'title' => 'required|max:255',
             'description' => 'required|max:255',
@@ -63,6 +65,8 @@ class QuizController extends Controller
         $quiz->duration = $request->duration;
         $quiz->access_token = Str::random(8);
         $quiz->subject_id = $request->subject;
+        $quiz->start_time = $request->start_date;
+        $quiz->end_time = $request->end_date;
         $imageName = time() . '.' . $request->image->extension();
 
         Storage::putFileAs('public\quiz', $request->image, $imageName);
@@ -133,7 +137,8 @@ class QuizController extends Controller
         $quiz->title = $request->title;
         $quiz->subject_id = $request->subject;
         $quiz->duration = $request->duration;
-
+$quiz->start_time = $request->start_date;
+        $quiz->end_time = $request->end_date;
         $quiz->save();
         alert()->success('Quiz Updated Succesfully');
         return back();

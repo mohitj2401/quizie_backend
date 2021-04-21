@@ -19,6 +19,8 @@ class CreateQuizzesTable extends Migration
             $table->string('description');
             $table->integer('duration');
             $table->string('image');
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
             $table->tinyInteger('status')->default(1);
             $table->string('access_token');
             $table->foreignId('user_id')

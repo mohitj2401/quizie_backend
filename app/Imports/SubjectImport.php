@@ -12,7 +12,14 @@ class SubjectImport implements ToModel, WithHeadingRow
     /**
      * @param Collection $collection
      */
+    public function rules(): array
+    {
+        return [
+            'name'             => ['required', 'string', 'max:255'],
+            'code'            => ['required', 'string', 'max:255', 'unique:subjects'],
 
+        ];
+    }
 
     public function model(array $row)
     {

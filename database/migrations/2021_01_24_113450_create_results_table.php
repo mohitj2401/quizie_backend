@@ -18,6 +18,7 @@ class CreateResultsTable extends Migration
 
             $table->string('total');
             $table->string('incorrect');
+            $table->string('notAttempted');
             $table->string('correct');
             $table->string('results');
             $table->foreignId('quiz_id')
