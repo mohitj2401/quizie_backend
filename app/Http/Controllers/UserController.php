@@ -146,8 +146,8 @@ class UserController extends Controller
                     $data['msg'] = 'Logged In Successfully';
                     $data['api_token'] = $user->api_token;
                     } else {
-                        $data['status'] = '201';
-                        $data['msg'] = 'incorrect email or password ';
+                        $data['status'] = '501';
+                        $data['msg'] = "Old Password Doesn't not match. plaese try again!";
                     }
                 }else{
                         $data['status'] = '201';
