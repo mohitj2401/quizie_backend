@@ -113,7 +113,9 @@ class UserController extends Controller
             $user = User::where('api_token', $api_token)->first();
             if ($user) {
             try {
-               
+               $user->name=$request->name;
+               $user->email=$request->email;
+               $user->save();
                 $data['status'] = '200';
                 $data['api_token'] = $user->api_token;
                 $data['msg'] = 'User detail Updated Successfully';
