@@ -119,9 +119,10 @@ class ResultController extends Controller
 
                     $data['result'] = $result;
                     $data['result_json'] = json_decode($result->results);
-                    $pdf = PDF::loadView('admin.showresults', $data);
 
-                    return $pdf->download('result.pdf');
+        $pdf = PDF::loadView('admin.showresults', $data);
+
+        return $pdf->download('result.pdf');
                 } catch (\Throwable $th) {
                     $data['status'] = '500';
                     $data['msg'] = $th;

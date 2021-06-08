@@ -66,9 +66,7 @@
                                                        <i class="fas fa-ellipsis-v"></i>
                                                    </a>
                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                       <a class="dropdown-item"
-                                                           href="{{ route('teacher.edit.subject', $user->id) }}"><i
-                                                               class="fas fa-pencil-alt"></i>Edit</a>
+
                                                        <a class="dropdown-item"
                                                            href="{{ route('user.delete', $user->id) }}"><i
                                                                class="fas fa-trash"></i>Delete</a>
