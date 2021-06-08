@@ -20,12 +20,9 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\Web\DashboardController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\Web\DashboardController::class, 'index'])->name('home');
 //Quiz
 Route::get('/create/quiz', [App\Http\Controllers\Web\QuizController::class, 'create'])->name('create.quiz');
 Route::get('/quizzes', [App\Http\Controllers\Web\QuizController::class, 'index'])->name('quiz.view');
