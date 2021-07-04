@@ -56,6 +56,8 @@ Route::get('/user/list', [App\Http\Controllers\Web\UserController::class, 'index
 Route::post('/user/create', [App\Http\Controllers\Web\UserController::class, 'store']);
 Route::post('/user/approve', [App\Http\Controllers\Web\UserController::class, 'statusUpdate']);
 Route::get('/user/disable/{user}', [App\Http\Controllers\Web\UserController::class, 'destroy'])->name('user.delete');
+Route::get('/user/settings', [App\Http\Controllers\Web\UserController::class, 'userprofile'])->name('user.profile');
+Route::post('/user/changepass', [App\Http\Controllers\Web\UserController::class, 'changedPass'])->name('user.changepass');
 
 // Route::get('show/results', function () {
 //     $result = Result::find(2);

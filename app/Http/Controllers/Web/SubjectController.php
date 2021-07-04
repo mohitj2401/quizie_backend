@@ -25,7 +25,12 @@ class SubjectController extends Controller
     {
         $data['title'] = 'Subject List | Quizie';
         $data['active'] = 'subject';
-        $data['subjects'] = Subject::all();
+        if (auth()->user()->usertype_id == 1) {
+            $data['subjects'] = Subject::all();
+        } else {
+            $data['subjects'] = Subject::where('user_id', auth()->user()->id)->get();
+        }
+        // $data['subjects'] = Subject::all();
         return view('subject.list', $data);
     }
 

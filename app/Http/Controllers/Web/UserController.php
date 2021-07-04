@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\UserImport;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
@@ -103,8 +104,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->deleted = 1;
-        $user->save();
+        if (auth()->user()->usertype_id == 1) {
+            $user->deleted = 1;
+            $user->save();
+        } else {
+            alert()->warning('Not Allowed');
+            return redirect()->back();
+        }
+
         alert()->success('User deleted successfuly');
         return redirect()->back();
     }
@@ -114,5 +121,26 @@ class UserController extends Controller
         $user = User::find($request->id);
         $user->status = $request->status;
         $user->save();
+    }
+
+    public function userprofile()
+    {
+        $data['title'] = 'Profile Setting | Quizie';
+        $data['active'] = 'setting';
+        return view('admin.settings', $data);
+    }
+
+    public function changedPass(Request $request)
+    {
+        $user = User::find(auth()->user()->id);
+        if (Hash::check($request->password, $user->password)) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+            alert()->success('Password Changed Successfully');
+            return redirect()->back();
+        } else {
+            alert()->error('Incorrect Password ! please try again  ');
+            return redirect()->back();
+        }
     }
 }

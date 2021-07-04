@@ -28,8 +28,8 @@
                        User List
                        <a data-toggle="modal" data-target="#Import" href=""><i class="fas fa-plus-circle"
                                style="float: right;
-                                                                                                                                                                                                                                                                                                                                                                                    font-size: 23px;
-                                                                                                                                                                                                                                                                                                                                                                                    "></i></a>
+                                                                                                                                                                                                                                                                                                                                                                                            font-size: 23px;
+                                                                                                                                                                                                                                                                                                                                                                                            "></i></a>
                    </div>
                    <div class="card-body">
                        <div class="table-responsive">
@@ -43,8 +43,9 @@
 
                                        <th>Status</th>
                                        <th>Created At</th>
-                                       <th>Action</th>
-
+                                       @if (auth()->user()->usertype_id == 1)
+                                           <th>Action</th>
+                                       @endif
                                    </tr>
                                </thead>
 
@@ -58,22 +59,24 @@
                                            </td>
 
                                            <td>{{ $user->created_at }}</td>
+                                           @if (auth()->user()->usertype_id == 1)
 
-                                           <td>
+                                               <td>
 
-                                               <div class="dropdown">
-                                                   <a type="button" id="dropdownMenuButton" data-toggle="dropdown">
-                                                       <i class="fas fa-ellipsis-v"></i>
-                                                   </a>
-                                                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                   <div class="dropdown">
+                                                       <a type="button" id="dropdownMenuButton" data-toggle="dropdown">
+                                                           <i class="fas fa-ellipsis-v"></i>
+                                                       </a>
+                                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-                                                       <a class="dropdown-item"
-                                                           href="{{ route('user.delete', $user->id) }}"><i
-                                                               class="fas fa-trash"></i>Delete</a>
+                                                           <a class="dropdown-item"
+                                                               href="{{ route('user.delete', $user->id) }}"><i
+                                                                   class="fas fa-trash"></i>Delete</a>
+                                                       </div>
                                                    </div>
-                                               </div>
 
-                                           </td>
+                                               </td>
+                                           @endif
                                        </tr>
                                    @endforeach
                                </tbody>
@@ -144,6 +147,5 @@
                    })
                }
            });
-
        </script>
    @endsection

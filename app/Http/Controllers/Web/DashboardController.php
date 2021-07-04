@@ -19,7 +19,12 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $data['quizzes'] = Quiz::all();
+        if (auth()->user()->usertype_id == 1) {
+            $data['quizzes'] = Quiz::all();
+        } else {
+            $data['quizzes'] = Quiz::where('user_id', auth()->user()->id)->get();
+        }
+
         $data['active'] = 'dashboard';
         $data['title'] = 'Dashboard | Quizie';
         return view('admin.index', $data);
