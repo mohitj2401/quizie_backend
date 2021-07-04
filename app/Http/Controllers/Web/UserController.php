@@ -133,7 +133,7 @@ class UserController extends Controller
     public function changedPass(Request $request)
     {
         $user = User::find(auth()->user()->id);
-        if (Hash::check($request->password, $user->password)) {
+        if (Hash::check($request->old_password, $user->password)) {
             $user->password = Hash::make($request->password);
             $user->save();
             alert()->success('Password Changed Successfully');
