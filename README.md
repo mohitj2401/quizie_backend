@@ -30,7 +30,7 @@ Owner Account details :
     
     #Its a teachers and owner Portal teachers can add quiz , users, questions
     
-##Featrues
+## Featrues
 
     1. Allow to uploads from excel file
     2. Teachers can see all the student who attended their quiz and also can download quiz result
