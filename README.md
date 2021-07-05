@@ -10,7 +10,7 @@ Quizies app repo link : https://github.com/mohitj2401/quizee
 
     1. Clone the repository
 
-Types these command 
+Type these command 
 
     3. cd quizie_backend
     5. Composer install
