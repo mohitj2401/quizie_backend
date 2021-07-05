@@ -12,12 +12,12 @@ Quizies app repo link : https://github.com/mohitj2401/quizee
 
 Type these command 
 
-    3. cd quizie_backend
-    5. Composer install
-    7. npm install
-    9. cp .env.example .env (configure your database their)
-    10. php artisan key:generate
-    11. php artisan migrate --seed
+    2. cd quizie_backend
+    3. Composer install
+    4. npm install
+    5. cp .env.example .env (configure your database their)
+    6. php artisan key:generate
+    6. php artisan migrate --seed
 
 Owner Account details :
 
