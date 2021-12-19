@@ -133,7 +133,6 @@ class QuizController extends Controller
             } else {
                 $data['status'] = '511';
                 $data['msg'] = 'Please Login Again';
-                $data['th'] = $th;
             }
         } else {
             $data['status'] = '511';
