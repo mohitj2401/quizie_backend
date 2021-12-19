@@ -25,7 +25,7 @@ class ResultController extends Controller
 
                     $result->results = $request['data1'];
                     $res = json_decode($request['data1']);
-                    $total=count(Quiz::find($request['quizId'])->question); 
+                    $total = count(Quiz::find($request['quizId'])->question);
                     $notAttempted = $total - count($res);
                     $correct = 0;
                     $incorrect = 0;
@@ -40,7 +40,7 @@ class ResultController extends Controller
 
                     $result->user_id = $user->id;
                     $result->notAttempted = $notAttempted;
-                    $result->total =$total;
+                    $result->total = $total;
                     $result->incorrect = $incorrect;
                     $result->correct = $correct;
                     $result->quiz_id = $request['quizId'];
@@ -52,7 +52,7 @@ class ResultController extends Controller
                     $data['msg'] = $th;
                 }
             } else {
-                $data['status'] = '404';
+                $data['status'] = '511';
                 $data['msg'] = 'User Not Found';
             }
         }
@@ -77,7 +77,7 @@ class ResultController extends Controller
                     $data['msg'] = $th;
                 }
             } else {
-                $data['status'] = '404';
+                $data['status'] = '511';
                 $data['msg'] = 'User Not Found';
             }
         }
@@ -100,7 +100,7 @@ class ResultController extends Controller
                     $data['msg'] = $th;
                 }
             } else {
-                $data['status'] = '404';
+                $data['status'] = '511';
                 $data['msg'] = 'User Not Found';
             }
         }
@@ -120,15 +120,15 @@ class ResultController extends Controller
                     $data['result'] = $result;
                     $data['result_json'] = json_decode($result->results);
 
-        $pdf = PDF::loadView('admin.showresults', $data);
+                    $pdf = PDF::loadView('admin.showresults', $data);
 
-        return $pdf->download('result.pdf');
+                    return $pdf->download('result.pdf');
                 } catch (\Throwable $th) {
                     $data['status'] = '500';
                     $data['msg'] = $th;
                 }
             } else {
-                $data['status'] = '404';
+                $data['status'] = '511';
                 $data['msg'] = 'User Not Found';
             }
         }

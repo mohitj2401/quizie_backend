@@ -21,12 +21,12 @@ class AppSubjectController extends Controller
                     $data['status'] = '200';
                     $data['msg'] = 'All Quizzes';
                 } catch (\Throwable $th) {
-                    $data['status'] = '401';
+                    $data['status'] = '500';
                     $data['msg'] = 'Please Try Again After Some Time';
                     $data['th'] = $th;
                 }
             } else {
-                $data['status'] = '404';
+                $data['status'] = '203';
                 $data['msg'] = 'User Not Found';
             }
         }
@@ -45,12 +45,12 @@ class AppSubjectController extends Controller
                     $data['status'] = '200';
                     $data['msg'] = 'All Quizzes';
                 } catch (\Throwable $th) {
-                    $data['status'] = '401';
+                    $data['status'] = '500';
                     $data['msg'] = 'Please Try Again After Some Time';
                     $data['th'] = $th;
                 }
             } else {
-                $data['status'] = '404';
+                $data['status'] = '203';
                 $data['msg'] = 'User Not Found';
             }
         }

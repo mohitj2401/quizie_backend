@@ -40,12 +40,12 @@ class QuizController extends Controller
                         $data['quiz_id'] = $quiz->id;
                         $data['msg'] = 'Quiz Stored Successfully';
                     } catch (\Throwable $th) {
-                        $data['status'] = '401';
+                        $data['status'] = '501';
                         $data['msg'] = 'Please Try Again After Some Time';
                         $data['th'] = $th;
                     }
                 } else {
-                    $data['status'] = '404';
+                    $data['status'] = '511';
                     $data['msg'] = 'User Not Found';
                 }
             }
@@ -53,60 +53,60 @@ class QuizController extends Controller
             return response()->json($data);
         }
     }
-    public function getQuiz($subject,$api_token)
+    public function getQuiz($subject, $api_token)
     {
         if ($api_token) {
             $user = User::where('api_token', $api_token)->first();
             if ($user) {
-                 
-                try {
-                if (count($user->quiz) > 0) {
-                    $data['data'] = $user->quiz()->withCount('question')
-                        ->get();
-                }
-                if($user->usertype_id==3){
-                    $quiz_ids=$user->result->pluck('quiz_id');
-                    $data['data'] = Subject::find($subject)->quiz()->whereNotIn('id',$quiz_ids)->has('question', '>' , 0)->withCount('question')
-                        ->get();
-                }
 
-                $data['status'] = '200';
-                $data['msg'] = 'All Quizzes';
+                try {
+                    if (count($user->quiz) > 0) {
+                        $data['data'] = $user->quiz()->withCount('question')
+                            ->get();
+                    }
+                    if ($user->usertype_id == 3) {
+                        $quiz_ids = $user->result->pluck('quiz_id');
+                        $data['data'] = Subject::find($subject)->quiz()->whereNotIn('id', $quiz_ids)->has('question', '>', 0)->withCount('question')
+                            ->get();
+                    }
+
+                    $data['status'] = '200';
+                    $data['msg'] = 'All Quizzes';
                 } catch (\Throwable $th) {
-                    $data['status'] = '401';
+                    $data['status'] = '500';
                     $data['msg'] = 'Please Try Again After Some Time';
                     $data['th'] = $th;
                 }
             } else {
-                $data['status'] = '404';
+                $data['status'] = '511';
                 $data['msg'] = 'User Not Found';
             }
         }
         return response()->json($data);
     }
-    public function getSingleQuiz($quiz_id,$api_token)
+    public function getSingleQuiz($quiz_id, $api_token)
     {
         if ($api_token) {
             $user = User::where('api_token', $api_token)->first();
             if ($user) {
-                 
-                try {
-                
-                if($user->usertype_id==3){
-                    
-                    $data['data'] =Quiz::where('id',$quiz_id)->has('question', '>' , 0)->withCount('question')
-                        ->get();
-                }
 
-                $data['status'] = '200';
-                $data['msg'] = 'All Quizzes';
+                try {
+
+                    if ($user->usertype_id == 3) {
+
+                        $data['data'] = Quiz::where('id', $quiz_id)->has('question', '>', 0)->withCount('question')
+                            ->get();
+                    }
+
+                    $data['status'] = '200';
+                    $data['msg'] = 'All Quizzes';
                 } catch (\Throwable $th) {
-                    $data['status'] = '401';
+                    $data['status'] = '500';
                     $data['msg'] = 'Please Try Again After Some Time';
                     $data['th'] = $th;
                 }
             } else {
-                $data['status'] = '404';
+                $data['status'] = '511';
                 $data['msg'] = 'User Not Found';
             }
         }
@@ -126,21 +126,19 @@ class QuizController extends Controller
                     $data['status'] = '200';
                     $data['msg'] = 'quiz Deleted Successfully';
                 } catch (\Throwable $th) {
-                    $data['status'] = '401';
+                    $data['status'] = '500';
                     $data['msg'] = 'Please Try Again After Some Time';
                     $data['th'] = $th;
                 }
             } else {
-                $data['status'] = '404';
+                $data['status'] = '511';
                 $data['msg'] = 'Please Login Again';
                 $data['th'] = $th;
             }
         } else {
-            $data['status'] = '401';
+            $data['status'] = '511';
             $data['msg'] = 'Please Try Again After Some Time';
         }
         return response()->json($data);
     }
-
-    
 }

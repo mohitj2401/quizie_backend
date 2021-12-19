@@ -35,12 +35,12 @@ class QuestionController extends Controller
                     $data['status'] = '200';
                     $data['msg'] = 'Question Stored Successfully';
                 } catch (\Throwable $th) {
-                    $data['status'] = '401';
+                    $data['status'] = '500';
                     $data['msg'] = 'Please Try Again After Some Time';
                     $data['th'] = $th;
                 }
             } else {
-                $data['status'] = '401';
+                $data['status'] = '511';
                 $data['msg'] = 'Please Try Again After Some Time';
             }
 
@@ -59,12 +59,12 @@ class QuestionController extends Controller
                 $data['status'] = '200';
                 $data['msg'] = 'Question Stored Successfully';
             } catch (\Throwable $th) {
-                $data['status'] = '401';
+                $data['status'] = '500';
                 $data['msg'] = 'Please Try Again After Some Time';
                 $data['th'] = $th;
             }
         } else {
-            $data['status'] = '401';
+            $data['status'] = '511';
             $data['msg'] = 'Please Try Again After Some Time';
         }
 
